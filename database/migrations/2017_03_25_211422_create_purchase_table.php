@@ -14,12 +14,12 @@ class CreatePurchaseTable extends Migration
     public function up()
     {
       Schema::create('purchase', function (Blueprint $table) {
-          $table->string('cname');
-          $table->string('pname');
+          $table->string('cname', 40);
+          $table->string('pname', 40);
           $table->timestamp('puttime');
-          $table->integer('quantity');
-          $table->double('puprice');
-          $table->string('status');
+          $table->integer('quantity')->default(null);
+          $table->double('puprice', 10, 2)->default(null);
+          $table->string('status', 40)->default(null);
           $table->timestamps();
           $table->primary(array('cname', 'pname', 'puttime'));
           $table->foreign('cname')->references('cname')->on('customer')->onDelete('cascade');
