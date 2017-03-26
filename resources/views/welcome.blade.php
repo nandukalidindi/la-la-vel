@@ -189,7 +189,7 @@
           <div class="flexsearch--wrapper">
             <form class="flexsearch--form" action="#" method="post">
               <div class="flexsearch--input-wrapper">
-                <input class="flexsearch--input" type="search" placeholder="Enter Customer name">
+                <input id="customer-name" class="flexsearch--input" type="search" placeholder="Enter Customer name">
               </div>
             </form>
           </div>
@@ -199,15 +199,18 @@
           <div class="flexsearch--wrapper">
             <form class="flexsearch--form" action="#" method="post">
               <div class="flexsearch--input-wrapper">
-                <input class="flexsearch--input" type="search" placeholder="Product keyword ">
+                <input id="search-keyword" class="flexsearch--input" type="search" placeholder="Product keyword ">
               </div>
             </form>
           </div>
         </div>
 
         <div class="submit-container">
-				  <input type="submit" value="" class="submit" />
+				  <input id="search-button" type="button" value="" class="submit" />
 			  </div>
       </div>
+      <meta name="_token" content="{!! csrf_token() !!}" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="{{asset('js/buy-update.js')}}"></script>
     </body>
 </html>

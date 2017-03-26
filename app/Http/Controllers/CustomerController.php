@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Response;
+use Session;
 
 class CustomerController extends Controller
 {
@@ -47,7 +49,11 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+      $customer = DB::select("SELECT cname FROM customer WHERE LOWER(cname) LIKE ? LIMIT 1", ['%' . $id . '%']);
+      if(count($customer) !== 0) {
+        Session::put('_customer', $customer[0]->cname);
+      }
+      return Response::json($customer);
     }
 
     /**

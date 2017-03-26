@@ -1,9 +1,38 @@
 $(document).ready(function(){
 
+  $("#search-button").click(function (event) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    })
+
+    var keyword = $("#search-keyword")[0].value,
+        customer = $("#customer-name")[0].value === "" ? "dummy" : $("#customer-name")[0].value;
+
+    $.ajax({
+
+        type: "GET",
+        url: '/customer/' + customer.toLowerCase(),
+        dataType: 'json',
+        success: function (data) {
+          if(data.length !== 0) {
+            var customerName = data[0].cname;
+            window.sessionStorage.customerName = customerName;
+            window.location.replace('/product?customer=' + customerName);
+          }
+        },
+        error: function (data) {
+            console.log('Error:', data);
+        }
+    });
+  });
+
     var url = "/ajax-crud/public/tasks";
 
     //display modal form for task editing
     $(".buy-button").click(function (e) {
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -14,7 +43,7 @@ $(document).ready(function(){
 
         var formData = {
           pname: e.target.getAttribute('pname'),
-          cname: "Boy Xu"
+          cname: window.sessionStorage.customerName
         };
 
 
@@ -35,21 +64,7 @@ $(document).ready(function(){
             data: formData,
             dataType: 'json',
             success: function (data) {
-                debugger;
-                // var task = '<tr id="task' + data.id + '"><td>' + data.id + '</td><td>' + data.task + '</td><td>' + data.description + '</td><td>' + data.created_at + '</td>';
-                // task += '<td><button class="btn btn-warning btn-xs btn-detail open-modal" value="' + data.id + '">Edit</button>';
-                // task += '<button class="btn btn-danger btn-xs btn-delete delete-task" value="' + data.id + '">Delete</button></td></tr>';
-                //
-                // if (state == "add"){ //if user added a new record
-                //     $('#tasks-list').append(task);
-                // }else{ //if user updated an existing record
-                //
-                //     $("#task" + task_id).replaceWith( task );
-                // }
-                //
-                // $('#frmTasks').trigger("reset");
-                //
-                // $('#myModal').modal('hide')
+              location.reload();
             },
             error: function (data) {
                 console.log('Error:', data);
