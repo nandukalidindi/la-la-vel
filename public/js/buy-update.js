@@ -19,11 +19,11 @@ $(document).ready(function(){
           if(data.length !== 0) {
             var customerName = data[0].cname;
             window.sessionStorage.customerName = customerName;
-            window.location.replace('/product?customer=' + customerName);
+            window.location.replace('/product?customer=' + customerName + "&name=" + keyword.toLowerCase());
           }
         },
         error: function (data) {
-            console.log('Error:', data);
+          console.log('Error:', data);
         }
     });
   });

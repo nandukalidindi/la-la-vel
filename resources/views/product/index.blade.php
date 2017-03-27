@@ -77,6 +77,18 @@
           }
           }
 
+          .button {
+              background-color: #4CAF50;
+              border: none;
+              color: white;
+              height: 50px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 14px;
+              cursor: pointer;
+          }
+
         </style>
     </head>
     <body>
@@ -116,7 +128,7 @@
                 @if($product->quantity != 0) PENDING @endif
               </div>
               <div class="cell">
-                <button class="btn btn-warning btn-xs btn-detail open-modal buy-button" pname="{{$product->pname}}" cname="{{$product->cname}}" puttime="{{$product->puttime}}" quantity={{$product->quantity}}>BUY @if($product->quantity != 0) ({{$product->quantity}}) @endif</button>
+                <button class="button buy-button" pname="{{$product->pname}}" cname="{{$product->cname}}" puttime="{{$product->puttime}}" quantity={{$product->quantity}}>BUY @if($product->quantity != 0) ({{$product->quantity}}) @endif</button>
               </div>
             </div>
           @endforeach

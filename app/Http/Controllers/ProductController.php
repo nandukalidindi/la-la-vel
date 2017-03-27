@@ -17,7 +17,26 @@ class ProductController extends Controller
     public function index()
     {
       $customer_name = Input::get('customer');
-      $products = DB::select("SELECT product.pname, product.pdescription, product.pprice, product.pstatus, customer_purchase.puttime, customer_purchase.cname, (CASE WHEN customer_purchase.quantity IS NULL THEN 0 ELSE customer_purchase.quantity END) FROM product LEFT JOIN (SELECT * FROM purchase WHERE cname=? AND status='pending') AS customer_purchase ON product.pname = customer_purchase.pname", [$customer_name]);
+      $keyword = Input::get('name');
+      $products = DB::select("SELECT product_like.pname,
+                                     product_like.pdescription,
+                                     product_like.pprice,
+                                     product_like.pstatus,
+                                     customer_purchase.puttime,
+                                     customer_purchase.cname,
+                                     (CASE WHEN customer_purchase.quantity IS NULL
+                                       THEN 0
+                                       ELSE customer_purchase.quantity
+                                      END)
+                               FROM (SELECT *
+                                     FROM product
+                                     WHERE lower(pdescription) LIKE ?) AS product_like
+                               LEFT JOIN (SELECT *
+                                          FROM purchase
+                                          WHERE cname=? AND status='pending') AS customer_purchase
+                               ON product_like.pname = customer_purchase.pname",
+                               ['%' . $keyword . '%', $customer_name]);
+
       return view('product.index', compact('products'));
     }
 
