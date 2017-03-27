@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-      $customer_name = Input::get('customer');
+      $customer_name = Session::get('_customer');
       $keyword = Input::get('name');
       $products = DB::select("SELECT product_like.pname,
                                      product_like.pdescription,

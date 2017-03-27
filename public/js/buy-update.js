@@ -19,7 +19,7 @@ $(document).ready(function(){
           if(data.length !== 0) {
             var customerName = data[0].cname;
             window.sessionStorage.customerName = customerName;
-            window.location.replace('/product?customer=' + customerName + "&name=" + keyword.toLowerCase());
+            window.location.replace('/product?name=' + keyword.toLowerCase());
           }
         },
         error: function (data) {
@@ -58,7 +58,6 @@ $(document).ready(function(){
         }
 
         $.ajax({
-
             type: type,
             url: '/purchases',
             data: formData,
