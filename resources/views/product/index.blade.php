@@ -89,11 +89,27 @@
               cursor: pointer;
           }
 
+          .app-header {
+            height: 65px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+
         </style>
     </head>
     <body>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <div class="app-header">
+        <div class="cell">
+          <button id="home-button" class="button" > HOME </button>
+        </div>
+        <div id="cell" style="margin-right: 5px;">
+          <button id="logged-in-user" class="button" > {{ $logged_in_user }} </button>
+        </div>
+      </div>
       <div class="wrapper">
 
         <div class="table">

@@ -40,8 +40,11 @@ class ProductController extends Controller
                                           WHERE cname=? AND status='pending') AS customer_purchase
                                ON product_like.pname = customer_purchase.pname",
                                ['%' . $keyword . '%', $customer_name]);
-
-      return view('product.index', compact('products'));
+      $response = array(
+        "logged_in_user" => $customer_name,
+        "products" => $products
+      );
+      return view('product.index', $response);
     }
 
     /**

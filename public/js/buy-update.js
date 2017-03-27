@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+  $("#home-button").click(function(event) {
+    window.location.replace("/");
+  });
+
   $("#search-button").click(function (event) {
     $.ajaxSetup({
         headers: {
@@ -20,6 +24,7 @@ $(document).ready(function(){
             var customerName = data[0].cname;
             window.sessionStorage.customerName = customerName;
             window.location.replace('/product?name=' + keyword.toLowerCase());
+            document.getElementById('logged-in-user').innerText = customerName;
           }
         },
         error: function (data) {
