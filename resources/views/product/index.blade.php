@@ -125,10 +125,13 @@
               Phone
             </div>
             <div class="cell">
+              Product Status
+            </div>
+            <div class="cell">
               Purchase Price
             </div>
             <div class="cell">
-              Status
+              Purchase Status
             </div>
           </div>
 
@@ -144,13 +147,18 @@
                 {{ $product->pprice }}
               </div>
               <div class="cell">
+                {{ $product->pstatus }}
+              </div>
+              <div class="cell">
                 {{ $product->puprice }}
               </div>
               <div class="cell">
                 @if($product->quantity != 0) PENDING @endif
               </div>
               <div class="cell">
-                <button class="button buy-button" pname="{{$product->pname}}" cname="{{$product->cname}}" puttime="{{$product->puttime}}" quantity={{$product->quantity}}>BUY @if($product->quantity != 0) ({{$product->quantity}}) @endif</button>
+                @if($product->pstatus != "discontinued")
+                  <button class="button buy-button" pname="{{$product->pname}}" cname="{{$product->cname}}" puttime="{{$product->puttime}}" quantity={{$product->quantity}} >BUY @if($product->quantity != 0) ({{$product->quantity}}) @endif</button>
+                @endif
               </div>
             </div>
           @endforeach
