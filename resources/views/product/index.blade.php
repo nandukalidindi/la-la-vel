@@ -109,6 +109,9 @@
               Phone
             </div>
             <div class="cell">
+              Purchase Price
+            </div>
+            <div class="cell">
               Status
             </div>
           </div>
@@ -123,6 +126,9 @@
               </div>
               <div class="cell">
                 {{ $product->pprice }}
+              </div>
+              <div class="cell">
+                {{ $product->puprice }}
               </div>
               <div class="cell">
                 @if($product->quantity != 0) PENDING @endif

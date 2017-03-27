@@ -27,6 +27,10 @@ class ProductController extends Controller
                                      (CASE WHEN customer_purchase.quantity IS NULL
                                        THEN 0
                                        ELSE customer_purchase.quantity
+                                      END),
+                                     (CASE WHEN customer_purchase.puprice IS NULL
+                                       THEN 0
+                                       ELSE customer_purchase.puprice
                                       END)
                                FROM (SELECT *
                                      FROM product
