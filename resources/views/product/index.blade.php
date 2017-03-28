@@ -26,7 +26,7 @@
           .wrapper {
           margin: 0 auto;
           padding: 40px;
-          max-width: 800px;
+          max-width: 1000px;
           }
 
           .table {
@@ -97,6 +97,11 @@
             align-items: center;
           }
 
+          .nav-font {
+            font-weight: bolder;
+            font-size: x-large;
+          }
+
         </style>
     </head>
     <body>
@@ -104,10 +109,10 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
       <div class="app-header">
         <div class="cell">
-          <button id="home-button" class="button" > HOME </button>
+          <button id="home-button" class="button" > <span class="nav-font"> HOME </span> </button>
         </div>
         <div id="cell" style="margin-right: 5px;">
-          <button id="logged-in-user" class="button" > {{ $logged_in_user }} </button>
+          <button id="logged-in-user" class="button" > <span class="nav-font"> {{ $logged_in_user }} </span> </button>
         </div>
       </div>
       <div class="wrapper">
@@ -115,22 +120,25 @@
         <div class="table">
 
           <div class="row header">
-            <div class="cell">
+            <div class="cell" style="width:15%">
               Name
             </div>
-            <div class="cell">
+            <div class="cell" style="width:15%">
               Address
             </div>
-            <div class="cell">
-              Phone
+            <div class="cell" style="width:10%">
+              Unit Price
             </div>
-            <div class="cell">
+            <div class="cell" style="width:10%">
               Product Status
             </div>
-            <div class="cell">
+            <div class="cell" style="width:10%">
               Purchase Price
             </div>
-            <div class="cell">
+            <div class="cell" style="width:20%">
+              Updated at
+            </div>
+            <div class="cell" style="width:15%">
               Purchase Status
             </div>
           </div>
@@ -153,11 +161,14 @@
                 {{ $product->puprice }}
               </div>
               <div class="cell">
-                @if($product->quantity != 0) PENDING @endif
+                {{ $product->puttime }}
               </div>
               <div class="cell">
+                @if($product->quantity != 0) PENDING @endif
+              </div>
+              <div >
                 @if($product->pstatus != "discontinued")
-                  <button class="button buy-button" pname="{{$product->pname}}" cname="{{$product->cname}}" puttime="{{$product->puttime}}" quantity={{$product->quantity}} >BUY @if($product->quantity != 0) ({{$product->quantity}}) @endif</button>
+                  <button style="width:70px" class="button buy-button" pname="{{$product->pname}}" cname="{{$product->cname}}" puttime="{{$product->puttime}}" quantity={{$product->quantity}} >BUY @if($product->quantity != 0) ({{$product->quantity}}) @endif</button>
                 @endif
               </div>
             </div>
